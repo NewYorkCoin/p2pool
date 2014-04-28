@@ -144,6 +144,29 @@ nets = dict(
         DUMB_SCRYPT_DIFF=2**16,
         DUST_THRESHOLD=1e8,
     ),
+    
+	newyorkcoin=math.Object(
+        P2P_PREFIX='c0c0c0c0'.decode('hex'),
+        P2P_PORT=17020,
+        ADDRESS_VERSION=30,
+        RPC_PORT=18823,
+        RPC_CHECK=defer.inlineCallbacks(lambda bitcoind: defer.returnValue(
+            'dogecoinaddress' in (yield bitcoind.rpc_help()) and
+            not (yield bitcoind.rpc_getinfo())['testnet']
+        )),
+        SUBSIDY_FUNC=lambda height: 1000000*100000000 >> (height + 1)//100000,
+        POW_FUNC=lambda data: pack.IntType(256).unpack(__import__('ltc_scrypt').getPoWHash(data)),
+        BLOCK_PERIOD=30,
+        SYMBOL='NYC',
+        CONF_FILE_FUNC=lambda: os.path.join(os.path.join(os.environ['APPDATA'], 'newyorkc') if platform.system() == 'Windows' else os.path.expanduser('~/Library/Application Support/Newyorkc/') if platform.system() == 'Darwin' else os.path.expanduser('~/.newyorkc'), 'newyorkc.conf'),
+        BLOCK_EXPLORER_URL_PREFIX='http://192.241.161.74/block/',
+        ADDRESS_EXPLORER_URL_PREFIX='http://192.241.161.74/address/',
+        TX_EXPLORER_URL_PREFIX='http://192.241.161.74/tx/',
+        SANE_TARGET_RANGE=(2**256//1000000000 - 1, 2**256//1000 - 1),
+        DUMB_SCRYPT_DIFF=2**16,
+        DUST_THRESHOLD=0.03e8,
+    ),
+
 
     terracoin=math.Object(
         P2P_PREFIX='42babe56'.decode('hex'),

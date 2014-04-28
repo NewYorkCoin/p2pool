@@ -83,6 +83,26 @@ nets = dict(
         ANNOUNCE_CHANNEL='#p2pool-alt',
         VERSION_CHECK=lambda v: True,
     ),
+    
+	newyorkcoin=math.Object(
+        PARENT=networks.nets['newyorkcoin'],
+        SHARE_PERIOD=10,
+        CHAIN_LENGTH=24*60*60//10,
+        REAL_CHAIN_LENGTH=24*60*60//10,
+        TARGET_LOOKBEHIND=60,
+        SPREAD=45,
+        IDENTIFIER='c0c0c0c3B2F68CDA'.decode('hex'),
+        PREFIX='c0c0c0c541C11DDA'.decode('hex'),
+        P2P_PORT=27021,
+        MIN_TARGET=0,
+        MAX_TARGET=2**256//2**20 - 1,
+        PERSIST=True,
+        WORKER_PORT=27020,
+        BOOTSTRAP_ADDRS='p2pool.crunchpool.com p2pool2.crunchpool.com'.split(' '),
+        ANNOUNCE_CHANNEL='#p2pool-nyc',
+        VERSION_CHECK=lambda v: True,
+        # VERSION_WARNING=lambda v: 'Upgrade Newyorkc to >= 0.8.5.0!' if v < 70002 else None,
+    ),
 
     terracoin=math.Object(
         PARENT=networks.nets['terracoin'],
