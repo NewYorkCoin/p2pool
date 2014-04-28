@@ -148,7 +148,7 @@ nets = dict(
 	newyorkcoin=math.Object(
         P2P_PREFIX='c0c0c0c0'.decode('hex'),
         P2P_PORT=17020,
-        ADDRESS_VERSION=30,
+        ADDRESS_VERSION=60,
         RPC_PORT=18823,
         RPC_CHECK=defer.inlineCallbacks(lambda bitcoind: defer.returnValue(
             'dogecoinaddress' in (yield bitcoind.rpc_help()) and
