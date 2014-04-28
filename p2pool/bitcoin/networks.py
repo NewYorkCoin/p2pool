@@ -151,7 +151,7 @@ nets = dict(
         ADDRESS_VERSION=60,
         RPC_PORT=18823,
         RPC_CHECK=defer.inlineCallbacks(lambda bitcoind: defer.returnValue(
-            'dogecoinaddress' in (yield bitcoind.rpc_help()) and
+            'newyorkcaddress' in (yield bitcoind.rpc_help()) and
             not (yield bitcoind.rpc_getinfo())['testnet']
         )),
         SUBSIDY_FUNC=lambda height: 1000000*100000000 >> (height + 1)//100000,
